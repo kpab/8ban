@@ -15,9 +15,9 @@ public class False : MonoBehaviour
     {
         if(other.name == "Player")
         {
-            GameControl.stage_x += 42.26f;
-            GameControl.stage_z -= 59.85f; 
-            GameControl.stage_r = 0f;
+            GameControl.stage_x += 42.2f;
+            GameControl.stage_z -= 60f; 
+    
             Destroy(this.gameObject);
             if(this.tag == "True")
             {    

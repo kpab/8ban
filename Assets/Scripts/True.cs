@@ -21,9 +21,8 @@ public class True : MonoBehaviour
     {
         if(other.name == "Player")
         {
-            GameControl.stage_x -= 42.26f;
-            GameControl.stage_z += 5.5f; 
-            GameControl.stage_r += 180f;
+            GameControl.stage_x -= 22.3f;
+            GameControl.stage_z -= 60f; 
             Destroy(this.gameObject);
 
             if(this.tag == "True")

@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour
     public List<GameObject> Panels = new List<GameObject>(); //問題パネルリスト
     public List<Texture> texture_list = new List<Texture>(); //問題リスト
     public List<Texture> now_list = new List<Texture>(); // 現在の問題リスト
-    private List<int> answers = new List<int>() {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0}; // 0:正解 1:不正解
+    private List<int> answers = new List<int>() {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // 0:正解 1:不正解
     public List<int> now_answers = new List<int>(); // 現在の問題の答えリスト
     public List<Texture> wrong_questions = new List<Texture>(); // 間違えた問題の答えリスト
     public List<int> wrong_answers = new List<int>(); // 間違えた問題の答えリスト
@@ -26,7 +26,7 @@ public class GameControl : MonoBehaviour
 
     public static float stage_x;
     public static float stage_z;
-    public static float stage_r;
+
     public static int stage_number;
     private int random;
     private GameObject newStage;
@@ -39,10 +39,9 @@ public class GameControl : MonoBehaviour
         score = 0;
         stage_x = 0;
         stage_z = 0;
-        stage_r += 0;
 
         Texture tmp;
-        for(int i=1; i<answers.Count; i++) // 11個の問題をリストに格納
+        for(int i=1; i<answers.Count; i++) // 全ての問題をリストに格納
         {
             tmp = Resources.Load("Questions/"+i) as Texture;
             texture_list.Add(tmp);
@@ -59,7 +58,7 @@ public class GameControl : MonoBehaviour
     public void CreateStage()
     {   
         Debug.Log("Createスタート!");
-        newStage = Instantiate(Stage, new Vector3(stage_x, 0, stage_z), Quaternion.Euler(0, stage_r, 0));
+        newStage = Instantiate(Stage, new Vector3(stage_x, 0, stage_z), Quaternion.identity);
         RightWall = newStage.transform.Find("BlockTrue").gameObject;
         LeftWall = newStage.transform.Find("BlockFalse").gameObject;
         ScoreText = GameObject.Find(newStage.name+"/Canvas/ScoreText").GetComponent<TextMeshProUGUI>();
