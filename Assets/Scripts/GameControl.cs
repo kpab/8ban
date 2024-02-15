@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour
     public List<GameObject> Panels = new List<GameObject>(); //問題パネルリスト
     public List<Texture> texture_list = new List<Texture>(); //問題リスト
     public List<Texture> now_list = new List<Texture>(); // 現在の問題リスト
-    private List<int> answers = new List<int>() {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // 0:正解 1:不正解
+    private List<int> answers = new List<int>() {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}; // 0:正解 1:不正解
     public List<int> now_answers = new List<int>(); // 現在の問題の答えリスト
     public List<Texture> wrong_questions = new List<Texture>(); // 間違えた問題の答えリスト
     public List<int> wrong_answers = new List<int>(); // 間違えた問題の答えリスト
@@ -41,7 +41,7 @@ public class GameControl : MonoBehaviour
         stage_z = 0;
 
         Texture tmp;
-        for(int i=1; i<answers.Count; i++) // 全ての問題をリストに格納
+        for(int i=1; i<answers.Count+1; i++) // 全ての問題をリストに格納
         {
             tmp = Resources.Load("Questions/"+i) as Texture;
             texture_list.Add(tmp);
@@ -81,8 +81,15 @@ public class GameControl : MonoBehaviour
         Panels.Add(newStage.transform.Find("Oji/Panel3").gameObject);
         //Panels.Add(GameObject.Find("Panel"+i));
         material = Panels[3].GetComponent<MeshRenderer>().material;
-        random = Random.Range(0, texture_list.Count-1);
-        randomTexture = texture_list[random];
+        if(texture_list.Count == 1)
+        {
+            random = 0;
+        }
+        else
+        {
+            random = Random.Range(0, texture_list.Count-1);
+            randomTexture = texture_list[random];
+        }
         material.mainTexture = randomTexture; // i番パネルにテクスチャ設定
 
         now_list.Add(randomTexture); // 現在の問題リストに追加
